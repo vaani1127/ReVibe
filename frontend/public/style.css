@@ -1,0 +1,15 @@
+/* Custom styles for input fields with icons */
+.input-with-icon {
+    position: relative;
+}
+.input-with-icon .icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280; /* gray-500 */
+}
+.input-with-icon input,
+.input-with-icon select {
+    padding-left: 2.75rem; /* Make space for the icon */
+}

@@ -3,9 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Train Ticket Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    
+<body class="font-sans bg-gray-100">
+
+    <div class="min-h-screen flex flex-col">
+        
+        <header class="bg-white shadow-md">
+            <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                            IR
+                        </div>
+                        <div class="ml-4">
+                            <h1 class="text-2xl font-bold text-blue-900">INDIAN RAILWAYS</h1>
+                            <p class="text-sm text-gray-600">Safety | Security | Punctuality</p>
+                        </div>
+                    </div>
+                    
+                    <div class="hidden sm:flex space-x-2">
+                        <a href="#" class="bg-blue-800 text-white px-4 py-2 rounded-t-md font-semibold text-sm flex items-center">
+                            <i class="fas fa-ticket-alt mr-2"></i> BOOK TICKET
+                        </a>
+                        <a href="#" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-t-md font-semibold text-sm flex items-center hover:bg-gray-300">
+                            <i class="fas fa-id-card mr-2"></i> PNR STATUS
+                        </a>
+                        <a href="#" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-t-md font-semibold text-sm flex items-center hover:bg-gray-300">
+                            <i class="fas fa-chart-bar mr-2"></i> CHARTS / VACANCY
+                        </a>
+                    </div>
+
+                    <div>
+                        <button class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-300">
+                            <i class="fas fa-user-circle mr-2"></i> Action required
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 mt-4 md:mt-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                
+                <div class="md:col-span-5 lg:col-span-4">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h2 class="text-2xl font-bold text-blue-900 mb-6">BOOK TICKET</h2>
+                        
+                        <form id="bookingForm" class="space-y-4">
+                            <div class="input-with-icon">
+                                <span class="icon"><i class="fas fa-train"></i></span>
+                                <input type="text" id="fromStation" placeholder="From" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="button" class="p-2 bg-gray-200 rounded-full text-blue-700 hover:bg-gray-300">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                            </div>
+
+                            <div class="input-with-icon">
+                                <span class="icon"><i class="fas fa-train"></i></span>
+                                <input type="text" id="toStation" placeholder="To" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+
+                            <div class="input-with-icon">
+                                <span class="icon"><i class="fas fa-calendar-alt"></i></span>
+                                <input type="text" id="date" placeholder="DD/MM/YYYY" onfocus="(this.type='date')" onblur="(this.type='text')" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            
+                            <div class="input-with-icon">
+                                <span class="icon"><i class="fas fa-chair"></i></span>
+                                <select id="class" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none">
+                                    <option>All Classes</option>
+                                    <option>Sleeper (SL)</option>
+                                    <option>AC 3 Tier (3A)</option>
+                                    <option>AC 2 Tier (2A)</option>
+                                    <option>AC 1st Class (1A)</option>
+                                </select>
+                            </div>
+
+                            <div class="input-with-icon">
+                                <span class="icon"><i class="fas fa-users"></i></span>
+                                <select id="quota" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none">
+                                    <option>GENERAL</option>
+                                    <option>TATKAL</option>
+                                    <option>LADIES</option>
+                                    <option>LOWER BERTH/SR.CITIZEN</option>
+                                </select>
+                            </div>
+                            
+                            <div class="space-y-3 pt-4">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="disability" class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                    <label for="disability" class="ml-3 text-sm text-gray-700">Person With Disability Concession</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="flexibleDate" class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                    <label for="flexibleDate" class="ml-3 text-sm text-gray-700">Flexible With Date</label>
+                                </div>
+                                 <div class="flex items-center">
+                                    <input type="checkbox" id="availableBerth" class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                    <label for="availableBerth" class="ml-3 text-sm text-gray-700">Train with Available Berth</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="railwayPass" class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                    <label for="railwayPass" class="ml-3 text-sm text-gray-700">Railway Pass Concession</label>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                                <button type="button" onclick="searchTrains()" class="w-full bg-orange-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-orange-600 transition duration-200">
+                                    Search
+                                </button>
+                                <button type="button" class="w-full bg-blue-100 text-blue-800 font-bold py-3 px-6 rounded-lg hover:bg-blue-200 transition duration-200">
+                                    Easy Booking on AskDISHA
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-7 lg:col-span-8 relative">
+                    <div class="rounded-lg overflow-hidden shadow-lg h-full">
+                        <img src="https://placehold.co/1000x700/3B82F6/FFFFFF?text=Vande+Bharat+Train" 
+                             alt="Vande Bharat Express Train" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    
+                    <div class="absolute top-4 right-4 w-48 h-32">
+                         <img src="https://placehold.co/192x128/EBF8FF/3182CE?text=Celebrate+Every+Moment" 
+                             alt="Ad" 
+                             class="rounded-lg shadow-md">
+                    </div>
+                    
+                    <div class="absolute bottom-4 left-4 right-4 p-4 bg-black bg-opacity-70 rounded-lg">
+                        <h3 class="text-white font-bold text-lg">DEALS OF THE DAY</h3>
+                        <p class="text-yellow-300 text-sm">Upto 5% Online discount + Upto 15% valurled discount on 1st yr premium</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <footer class="text-center py-8 mt-8 border-t border-gray-300">
+                <p class="text-sm text-blue-800 font-semibold">
+                    Festival Round Trip Scheme: User Guide and Terms & Conditions
+                </p>
+                <p class="text-sm text-gray-600 mt-2">
+                    Customers can use enhanced interface for their IRCTC related queries!! 
+                    <a href="#" class="text-blue-600 hover:underline">https://enquiry.irctc.co.in</a>
+                </p>
+                <p class="text-xs text-gray-500 mt-4">
+                    Customer Care Numbers: 0101-14046 (Within India) | Call: +91-8044647999 / +91-80336734999 (Outside India)
+                </p>
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        // JavaScript for handling form submission
+        function searchTrains() {
+            // 1. Get all values from the form
+            const from = document.getElementById('fromStation').value;
+            const to = document.getElementById('toStation').value;
+            const date = document.getElementById('date').value;
+            const trainClass = document.getElementById('class').value;
+            const quota = document.getElementById('quota').value;
+        
+            console.log("Sending search request to backend...");
+        
+            // 2. Send this data to your new backend server
+            //    This URL 'http://localhost:3000' matches the port in your server.js
+            fetch('http://localhost:3000/api/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    from: from,
+                    to: to,
+                    date: date,
+                    trainClass: trainClass,
+                    quota: quota
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Success! Got results from backend:", data);
+                
+                // You can now display these results
+                // For this demo, we'll just alert the user.
+                alert(`Found ${data.length} trains! Check the console (F12) to see the results.`);
+            })
+            .catch(error => {
+                console.error('Error connecting to backend:', error);
+                alert('Error: Could not connect to the backend server. (Is it running? Check the console for details.)');
+            });
+        }
+    </script>
 </body>
 </html>
